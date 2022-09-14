@@ -1,5 +1,3 @@
-from calendar import c
-from random import random
 import random
 
 from dino_runner.components.obstacles.obstacle import Obstacle

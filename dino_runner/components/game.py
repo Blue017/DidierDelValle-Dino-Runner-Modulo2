@@ -24,6 +24,7 @@ class Game:
         self.power_up_manager = Power_Up_Manager()
         self.running = False
         self.score = 0
+        self.best_score = 0
         self.death_count = 0
 
     def execute(self):
@@ -55,6 +56,7 @@ class Game:
 
     def update(self):
         self.update_score()
+        self.update_best_score()
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
@@ -109,6 +111,11 @@ class Game:
         if self.score % 100 == 0 and self.game_speed < 700:
             self.game_speed += 5
 
+    def update_best_score(self):
+        if self.score >= self.best_score:
+            self.best_score = self.score
+            
+
     def handle_events_on_menu(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -128,6 +135,7 @@ class Game:
             self.generate_text('Press any key to Restart', (self.half_screen_width, self.half_screen_height + 50), 30)
             self.generate_text(f'Last score: {self.score}', (SCREEN_WIDTH - 150, 50), 25)
             self.generate_text(f'Deaths: {self.death_count}', (SCREEN_WIDTH - 100, SCREEN_HEIGHT - 100), 25)
+            self.generate_text(f'Best score: {self.best_score}', (150, 50), 25)
         self.screen.blit(ICON, (self.half_screen_width - 20, self.half_screen_height - 250))
         pygame.display.update()
         self.handle_events_on_menu()

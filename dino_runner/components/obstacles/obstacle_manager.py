@@ -1,7 +1,7 @@
 import pygame
 import random
 
-from dino_runner.utils.constants import BIRD, DEFAULT_TYPE, SHIELD_TYPE
+from dino_runner.utils.constants import BIRD, SHIELD_TYPE
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 
@@ -27,7 +27,7 @@ class ObstacleManager():
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                if game.player.type == DEFAULT_TYPE:
+                if game.player.type != SHIELD_TYPE:
                     game.death_count +=1
                     game.game_speed = 20
                     game.playing = False
